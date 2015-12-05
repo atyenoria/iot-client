@@ -2,8 +2,10 @@ var io = require('socket.io-client')
 var client = io.connect("http://localhost:3000", { 'force new connection' : true})
 
 
+var tok="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoidXNlcjEiLCJyb29tIjoidGVzdCIsImlhdCI6MTQ0OTI4NjUwMX0.TpHuRcKZGVeCDHZNkr9Dm47JwCu25THOnPQ1OhIArgU"
+
 client.on('connect', function () {
-  client.emit('authenticate', {token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE0NDkyODQ0Mzd9.5Bi0h_QlUSV8GUOupsKzh_zTSMYcB-gF-RYYV0xiqxo"});
+  client.emit('authenticate', {token: tok});
 });
 
 client.on('restart', function(channel) {
@@ -17,6 +19,12 @@ client.on('disconnect', function() {
 
 setTimeout(function() {
   client.emit('test', {test: "data"});
-  client.emit('authenticate', {token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE0NDkyODQ0Mzd9.5Bi0h_QlUSV8GUOupsKzh_zTSMYcB-gF-RYYV0xiqxo"});
   console.log("emit test")
-}, 5000);
+  client.emit('room', [{msg: "hello"},{room: "test"}]);
+
+  client.emit('id msg', [{msg: "hello"},{id: "m-hawkNTV8pVY1BmAAAE"}]);
+}, 1500);
+
+
+
+
