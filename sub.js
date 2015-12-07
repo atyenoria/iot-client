@@ -21,8 +21,6 @@ client.on('disconnect', function() {
 
 
 
-
-
 client.on('room_msg', function(data) {
     console.log(data)
     console.log("room_msg")
